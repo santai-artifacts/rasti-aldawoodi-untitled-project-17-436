@@ -18,7 +18,16 @@ db.exec(`
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     created_at TEXT NOT NULL DEFAULT (datetime('now'))
   );
+`);
 
+// Migration: if todos table exists without user_id (pre-auth schema), drop and recreate.
+// Old todos can't be attributed to a user, so dropping is safe.
+const todoCols = db.query("PRAGMA table_info(todos)").all() as any[];
+const hasUserId = todoCols.some((c: any) => c.name === "user_id");
+if (todoCols.length > 0 && !hasUserId) {
+  db.exec("DROP TABLE todos");
+}
+db.exec(`
   CREATE TABLE IF NOT EXISTS todos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,

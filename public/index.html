@@ -445,6 +445,7 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text })
     });
+    if (!res.ok) return;
     const todo = await res.json();
     todos.unshift(todo);
     render();
