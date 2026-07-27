@@ -34,49 +34,75 @@
       padding: 48px 16px 80px;
     }
 
-    .app {
-      width: 100%;
-      max-width: 520px;
-    }
+    .app { width: 100%; max-width: 520px; }
 
-    header {
-      margin-bottom: 32px;
-    }
+    /* ---- Auth screen ---- */
+    #authScreen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; }
 
-    h1 {
-      font-size: 2rem;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      color: var(--text);
-    }
-
-    .subtitle {
-      font-size: 0.875rem;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .add-form {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-
-    .add-form input {
-      flex: 1;
+    .auth-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: 20px;
+      padding: 36px 32px;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .auth-logo { font-size: 2rem; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 4px; }
+    .auth-tagline { color: var(--muted); font-size: 0.875rem; margin-bottom: 28px; }
+
+    .auth-tabs {
+      display: flex;
+      background: var(--surface2);
+      border-radius: 10px;
+      padding: 3px;
+      margin-bottom: 24px;
+      gap: 2px;
+    }
+
+    .auth-tab {
+      flex: 1;
+      background: none;
+      border: none;
+      border-radius: 8px;
+      color: var(--muted);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 8px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .auth-tab.active { background: var(--surface); color: var(--text); }
+
+    .field { margin-bottom: 14px; }
+    .field label { display: block; font-size: 0.8125rem; font-weight: 500; color: var(--muted); margin-bottom: 6px; }
+    .field input {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
       color: var(--text);
       font-family: inherit;
       font-size: 0.9375rem;
-      padding: 12px 16px;
+      padding: 11px 14px;
       outline: none;
       transition: border-color 0.15s;
     }
+    .field input::placeholder { color: var(--muted); }
+    .field input:focus { border-color: var(--accent); }
 
-    .add-form input::placeholder { color: var(--muted); }
-    .add-form input:focus { border-color: var(--accent); }
+    .auth-error {
+      background: rgba(240,96,96,0.1);
+      border: 1px solid rgba(240,96,96,0.3);
+      border-radius: 8px;
+      color: var(--danger);
+      font-size: 0.8125rem;
+      margin-bottom: 14px;
+      padding: 10px 12px;
+      display: none;
+    }
+    .auth-error.show { display: block; }
 
     .btn {
       border: none;
@@ -90,17 +116,69 @@
       white-space: nowrap;
     }
     .btn:active { transform: scale(0.97); }
-    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary { background: var(--accent); color: #fff; width: 100%; margin-top: 4px; }
     .btn-primary:hover { opacity: 0.88; }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     .btn-ghost { background: transparent; color: var(--muted); padding: 8px 12px; }
     .btn-ghost:hover { color: var(--danger); }
 
-    .filters {
-      display: flex;
-      gap: 4px;
-      margin-bottom: 16px;
-    }
+    /* ---- Todo screen ---- */
+    #todoScreen { display: none; }
 
+    header { margin-bottom: 32px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+    .header-left h1 { font-size: 2rem; font-weight: 600; letter-spacing: -0.03em; }
+    .header-left .subtitle { font-size: 0.875rem; color: var(--muted); margin-top: 4px; }
+    .user-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 12px 6px 8px;
+      flex-shrink: 0;
+    }
+    .avatar {
+      width: 26px;
+      height: 26px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .username { font-size: 0.8125rem; font-weight: 500; }
+    .logout-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.75rem;
+      padding: 0;
+      transition: color 0.15s;
+    }
+    .logout-btn:hover { color: var(--danger); }
+
+    .add-form { display: flex; gap: 8px; margin-bottom: 24px; }
+    .add-form input {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .add-form input::placeholder { color: var(--muted); }
+    .add-form input:focus { border-color: var(--accent); }
+
+    .filters { display: flex; gap: 4px; margin-bottom: 16px; }
     .filter-btn {
       background: none;
       border: none;
@@ -116,24 +194,10 @@
     .filter-btn.active { background: var(--accent-dim); color: var(--accent); }
     .filter-btn:hover:not(.active) { background: var(--surface2); color: var(--text); }
 
-    .list-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      min-height: 32px;
-    }
+    .list-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; min-height: 32px; }
+    .count { font-size: 0.8125rem; color: var(--muted); }
 
-    .count {
-      font-size: 0.8125rem;
-      color: var(--muted);
-    }
-
-    .todo-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+    .todo-list { display: flex; flex-direction: column; gap: 6px; }
 
     .todo-item {
       background: var(--surface);
@@ -146,18 +210,15 @@
       transition: border-color 0.15s, opacity 0.15s;
       animation: slideIn 0.18s ease;
     }
-
     @keyframes slideIn {
       from { opacity: 0; transform: translateY(-6px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     .todo-item:hover { border-color: var(--accent); }
     .todo-item.done { opacity: 0.55; }
 
     .check {
-      width: 20px;
-      height: 20px;
+      width: 20px; height: 20px;
       border: 2px solid var(--border);
       border-radius: 6px;
       cursor: pointer;
@@ -171,8 +232,7 @@
     .check.checked { background: var(--accent); border-color: var(--accent); }
     .check.checked::after {
       content: '';
-      width: 10px;
-      height: 6px;
+      width: 10px; height: 6px;
       border-left: 2px solid #fff;
       border-bottom: 2px solid #fff;
       transform: rotate(-45deg) translateY(-1px);
@@ -187,10 +247,7 @@
       word-break: break-word;
     }
     .todo-text.striked { text-decoration: line-through; color: var(--muted); }
-    .todo-text[contenteditable="true"] {
-      border-bottom: 1px dashed var(--accent);
-      cursor: text;
-    }
+    .todo-text[contenteditable="true"] { border-bottom: 1px dashed var(--accent); cursor: text; }
 
     .delete-btn {
       background: none;
@@ -207,62 +264,177 @@
     .todo-item:hover .delete-btn { opacity: 1; }
     .delete-btn:hover { color: var(--danger); }
 
-    .empty {
-      text-align: center;
-      padding: 48px 0;
-      color: var(--muted);
-    }
+    .empty { text-align: center; padding: 48px 0; color: var(--muted); }
     .empty .icon { font-size: 2.5rem; margin-bottom: 12px; }
     .empty p { font-size: 0.9375rem; }
 
     @media (max-width: 480px) {
       body { padding: 32px 12px 64px; }
-      h1 { font-size: 1.6rem; }
+      .auth-card { padding: 28px 20px; }
+      .header-left h1 { font-size: 1.6rem; }
     }
   </style>
 </head>
 <body>
 <div class="app">
-  <header>
-    <h1>My Todos</h1>
-    <p class="subtitle" id="date"></p>
-  </header>
 
-  <form class="add-form" id="addForm">
-    <input type="text" id="addInput" placeholder="Add a new task…" autocomplete="off" />
-    <button type="submit" class="btn btn-primary">Add</button>
-  </form>
+  <!-- Auth Screen -->
+  <div id="authScreen">
+    <div class="auth-card">
+      <div class="auth-logo">Todo</div>
+      <div class="auth-tagline">Sign in to your tasks</div>
 
-  <div class="filters">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="active">Active</button>
-    <button class="filter-btn" data-filter="done">Completed</button>
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Sign in</button>
+        <button class="auth-tab" data-tab="register">Create account</button>
+      </div>
+
+      <div id="authError" class="auth-error"></div>
+
+      <form id="authForm">
+        <div class="field">
+          <label for="authUsername">Username</label>
+          <input id="authUsername" type="text" placeholder="your username" autocomplete="username" />
+        </div>
+        <div class="field">
+          <label for="authPassword">Password</label>
+          <input id="authPassword" type="password" placeholder="••••••••" autocomplete="current-password" />
+        </div>
+        <button type="submit" class="btn btn-primary" id="authSubmit">Sign in</button>
+      </form>
+    </div>
   </div>
 
-  <div class="list-header">
-    <span class="count" id="count"></span>
-    <button class="btn btn-ghost" id="clearBtn" style="display:none">Clear completed</button>
+  <!-- Todo Screen -->
+  <div id="todoScreen">
+    <header>
+      <div class="header-left">
+        <h1>My Todos</h1>
+        <p class="subtitle" id="dateLabel"></p>
+      </div>
+      <div class="user-chip">
+        <div class="avatar" id="userAvatar"></div>
+        <span class="username" id="usernameLabel"></span>
+        <button class="logout-btn" id="logoutBtn" title="Sign out">Sign out</button>
+      </div>
+    </header>
+
+    <form class="add-form" id="addForm">
+      <input type="text" id="addInput" placeholder="Add a new task…" autocomplete="off" />
+      <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="active">Active</button>
+      <button class="filter-btn" data-filter="done">Completed</button>
+    </div>
+
+    <div class="list-header">
+      <span class="count" id="count"></span>
+      <button class="btn btn-ghost" id="clearBtn" style="display:none">Clear completed</button>
+    </div>
+
+    <div class="todo-list" id="list"></div>
   </div>
 
-  <div class="todo-list" id="list"></div>
 </div>
 
 <script>
   let todos = [];
   let filter = 'all';
+  let currentUser = null;
+  let authMode = 'login';
 
+  const authScreen = document.getElementById('authScreen');
+  const todoScreen = document.getElementById('todoScreen');
+  const authError = document.getElementById('authError');
+  const authSubmit = document.getElementById('authSubmit');
   const list = document.getElementById('list');
   const countEl = document.getElementById('count');
   const clearBtn = document.getElementById('clearBtn');
   const addInput = document.getElementById('addInput');
 
-  // Set date
-  document.getElementById('date').textContent = new Date().toLocaleDateString('en-US', {
+  document.getElementById('dateLabel').textContent = new Date().toLocaleDateString('en-US', {
     weekday: 'long', month: 'long', day: 'numeric'
   });
 
-  async function load() {
+  // --- Auth UI ---
+
+  document.querySelectorAll('.auth-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      authMode = tab.dataset.tab;
+      document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      authSubmit.textContent = authMode === 'login' ? 'Sign in' : 'Create account';
+      document.getElementById('authPassword').autocomplete =
+        authMode === 'login' ? 'current-password' : 'new-password';
+      setAuthError('');
+    });
+  });
+
+  function setAuthError(msg) {
+    authError.textContent = msg;
+    authError.classList.toggle('show', !!msg);
+  }
+
+  document.getElementById('authForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = document.getElementById('authUsername').value.trim();
+    const password = document.getElementById('authPassword').value;
+    if (!username || !password) return setAuthError('Please fill in all fields.');
+
+    authSubmit.disabled = true;
+    setAuthError('');
+
+    const res = await fetch(`/api/${authMode}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    const data = await res.json();
+    authSubmit.disabled = false;
+
+    if (!res.ok) return setAuthError(data.error || 'Something went wrong.');
+
+    currentUser = data.username;
+    showApp();
+  });
+
+  // --- App UI ---
+
+  function showApp() {
+    authScreen.style.display = 'none';
+    todoScreen.style.display = 'block';
+    document.getElementById('usernameLabel').textContent = currentUser;
+    document.getElementById('userAvatar').textContent = currentUser[0].toUpperCase();
+    loadTodos();
+  }
+
+  function showAuth() {
+    todoScreen.style.display = 'none';
+    authScreen.style.display = 'flex';
+    authScreen.style.flexDirection = 'column';
+    authScreen.style.alignItems = 'center';
+    authScreen.style.justifyContent = 'center';
+    authScreen.style.minHeight = '80vh';
+    document.getElementById('authUsername').value = '';
+    document.getElementById('authPassword').value = '';
+    setAuthError('');
+  }
+
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await fetch('/api/logout', { method: 'POST' });
+    currentUser = null;
+    todos = [];
+    showAuth();
+  });
+
+  // --- Todos ---
+
+  async function loadTodos() {
     const res = await fetch('/api/todos');
+    if (res.status === 401) { showAuth(); return; }
     todos = await res.json();
     render();
   }
@@ -284,8 +456,7 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ completed })
     });
-    const updated = await res.json();
-    todos = todos.map(t => t.id === id ? updated : t);
+    todos = todos.map(t => t.id === id ? res.ok ? { ...t, completed: completed ? 1 : 0 } : t : t);
     render();
   }
 
@@ -296,13 +467,12 @@
   }
 
   async function editTodo(id, text) {
-    const res = await fetch(`/api/todos/${id}`, {
+    await fetch(`/api/todos/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text })
     });
-    const updated = await res.json();
-    todos = todos.map(t => t.id === id ? updated : t);
+    todos = todos.map(t => t.id === id ? { ...t, text } : t);
   }
 
   async function clearCompleted() {
@@ -349,7 +519,8 @@
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
-  // Events
+  // --- Events ---
+
   document.getElementById('addForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const text = addInput.value.trim();
@@ -372,18 +543,15 @@
   list.addEventListener('click', async (e) => {
     const id = Number(e.target.dataset.id);
     if (!id) return;
-
     if (e.target.classList.contains('check')) {
       const todo = todos.find(t => t.id === id);
       await toggleTodo(id, !todo.completed);
     }
-
     if (e.target.classList.contains('delete-btn')) {
       await deleteTodo(id);
     }
   });
 
-  // Inline edit on double-click
   list.addEventListener('dblclick', (e) => {
     const el = e.target.closest('.todo-text');
     if (!el) return;
@@ -421,7 +589,19 @@
     await editTodo(id, newText);
   }, true);
 
-  load();
+  // --- Boot ---
+  async function init() {
+    const res = await fetch('/api/me');
+    const data = await res.json();
+    if (data.user) {
+      currentUser = data.user.username;
+      showApp();
+    } else {
+      showAuth();
+    }
+  }
+
+  init();
 </script>
 </body>
 </html>
